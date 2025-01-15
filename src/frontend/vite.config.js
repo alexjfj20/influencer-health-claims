@@ -7,18 +7,20 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: false,
+    sourcemap: true,
     minify: true,
     rollupOptions: {
-      external: ['@supabase/supabase-js'], // Agregar esta línea
+      external: ['@supabase/supabase-js'],
     },
   },
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: process.env.VITE_API_URL || 'http://localhost:3001',
         changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
       },
-    },
+    }
   },
+  base: '/'
 })
