@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/backend/server.js",
     "dev": "nodemon src/backend/server.js",
-    "dev:frontend": "cd src/frontend && npm run dev"
+    "dev:frontend": "cd src/frontend && npm run dev",
+    "build": "cd src/frontend && npm run build"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.47.14",
