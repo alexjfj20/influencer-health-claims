@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Influencer Health Claims Verification Tool
 
 This tool helps discover and verify health claims made by influencers using AI and various APIs.
@@ -52,3 +53,6 @@ This tool helps discover and verify health claims made by influencers using AI a
 ├── public/             # Static files
 └── database/          # Database migrations and schemas
 ```
+=======
+# influencer-health-claims
+>>>>>>> 5fb5596c53b3908a8fea58ec5337b96b4b4d035f
