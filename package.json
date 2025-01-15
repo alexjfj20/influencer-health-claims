@@ -9,7 +9,7 @@
     "dev:frontend": "cd src/frontend && npm run dev"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.47.13",
+    "@supabase/supabase-js": "^2.47.14",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
