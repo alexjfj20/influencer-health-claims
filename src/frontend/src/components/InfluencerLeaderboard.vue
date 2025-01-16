@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { supabase } from '../../../services/supabaseClient'
+import { supabase } from '../lib/supabaseClient'
 
 const influencers = ref([])
 const loading = ref(true)
