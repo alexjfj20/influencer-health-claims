@@ -8,19 +8,52 @@ const error = ref(null)
 
 const fetchInfluencers = async () => {
   try {
+    console.log('Iniciando fetchInfluencers')
     loading.value = true
-    const { data, error: supabaseError } = await supabase
-      .from('influencers')
-      .select('*')
-      .order('trust_score', { ascending: false })
-      .limit(10)
+    
+    // Datos de ejemplo mientras se configura Supabase
+    const mockData = [
+      {
+        id: 1,
+        full_name: 'Dr. Health Expert',
+        username: '@healthexpert',
+        platform: 'Instagram',
+        category: 'Nutrition',
+        trust_score: 85,
+        follower_count: 150000,
+        verified_claims: 45,
+        profile_image_url: null
+      },
+      {
+        id: 2,
+        full_name: 'Fitness Coach Pro',
+        username: '@fitnesspro',
+        platform: 'Twitter',
+        category: 'Fitness',
+        trust_score: 92,
+        follower_count: 250000,
+        verified_claims: 78,
+        profile_image_url: null
+      },
+      {
+        id: 3,
+        full_name: 'Wellness Guru',
+        username: '@wellnessguru',
+        platform: 'Instagram',
+        category: 'Wellness',
+        trust_score: 78,
+        follower_count: 180000,
+        verified_claims: 34,
+        profile_image_url: null
+      }
+    ]
 
-    if (supabaseError) throw supabaseError
-
-    influencers.value = data
+    // Usar datos de ejemplo
+    influencers.value = mockData
+    console.log('Influencers cargados:', influencers.value)
   } catch (err) {
     error.value = err.message
-    console.error('Error al cargar influencers:', err)
+    console.error('Error detallado al cargar influencers:', err)
   } finally {
     loading.value = false
   }
@@ -37,6 +70,7 @@ const formatNumber = (num) => {
 }
 
 onMounted(() => {
+  console.log('Componente montado')
   fetchInfluencers()
 })
 </script>
@@ -54,11 +88,11 @@ onMounted(() => {
         <span class="stat-label">Active Influencers</span>
       </div>
       <div class="stat-card">
-        <span class="stat-value">{{ formatNumber(influencers.reduce((sum, inf) => sum + inf.total_claims, 0)) }}</span>
+        <span class="stat-value">{{ formatNumber(influencers.reduce((sum, inf) => sum + (inf.verified_claims || 0), 0)) }}</span>
         <span class="stat-label">Claims Verified</span>
       </div>
       <div class="stat-card">
-        <span class="stat-value">{{ (influencers.reduce((sum, inf) => sum + inf.trust_score, 0) / influencers.length || 0).toFixed(1) }}%</span>
+        <span class="stat-value">{{ (influencers.reduce((sum, inf) => sum + (inf.trust_score || 0), 0) / (influencers.length || 1)).toFixed(1) }}%</span>
         <span class="stat-label">Average Trust Score</span>
       </div>
     </div>
@@ -110,7 +144,7 @@ onMounted(() => {
             <span class="trend-up">↑</span>
           </div>
           <div class="followers">{{ formatNumber(influencer.follower_count) }}</div>
-          <div class="claims">{{ influencer.verified_claims }}</div>
+          <div class="claims">{{ influencer.verified_claims || 0 }}</div>
         </div>
       </template>
     </div>
@@ -128,17 +162,22 @@ onMounted(() => {
 .leaderboard-header {
   text-align: center;
   margin-bottom: 2rem;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  border-radius: 8px;
 }
 
 .leaderboard-header h2 {
   font-size: 2rem;
-  color: #fff;
+  color: #ffffff;
   margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .subtitle {
-  color: #94a3b8;
+  color: #e2e8f0;
   font-size: 0.9rem;
+  opacity: 0.9;
 }
 
 .stats-overview {
@@ -277,6 +316,12 @@ onMounted(() => {
   padding: 2rem;
   text-align: center;
   color: #94a3b8;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.error {
+  color: #ef4444;
 }
 
 @media (max-width: 1024px) {

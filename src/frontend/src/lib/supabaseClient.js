@@ -8,7 +8,17 @@ if (!supabaseUrl || !supabaseAnonKey) {
         url: supabaseUrl ? 'configurada' : 'no configurada',
         key: supabaseAnonKey ? 'configurada' : 'no configurada'
     })
+    throw new Error('Faltan variables de entorno de Supabase')
 }
 
-// Usando la versión global de Supabase cargada desde el CDN
-export const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey)
+// Crear una única instancia del cliente Supabase
+const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: false,
+        storage: window.localStorage
+    }
+})
+
+export { supabase }

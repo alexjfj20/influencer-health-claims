@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import InfluencerLeaderboard from '../components/InfluencerLeaderboard.vue'
 import ResearchTask from '../components/ResearchTask.vue'
 import InfluencerList from '../components/InfluencerList.vue'
-import HealthClaimForm from '../components/HealthClaimForm.vue'
+import AddHealthClaim from '../components/AddHealthClaim.vue'
 
 const routes = [
   {
@@ -23,7 +23,7 @@ const routes = [
   {
     path: '/add',
     name: 'add',
-    component: HealthClaimForm
+    component: AddHealthClaim
   }
 ]
 

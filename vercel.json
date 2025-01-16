@@ -5,7 +5,8 @@
       "src": "src/frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "src/frontend/dist"
+        "distDir": "dist",
+        "buildCommand": "cd src/frontend && npm install && npm run build"
       }
     },
     {
@@ -19,9 +20,11 @@
       "dest": "src/backend/server.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "src/frontend/dist/$1",
-      "continue": true
+      "src": "/assets/(.*)",
+      "dest": "src/frontend/dist/assets/$1"
+    },
+    {
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
