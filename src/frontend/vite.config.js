@@ -12,15 +12,16 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    assetsDir: 'assets',
-    sourcemap: true,
-    minify: true,
+    assetsDir: '',
     rollupOptions: {
       external: ['@supabase/supabase-js'],
       output: {
         globals: {
           '@supabase/supabase-js': 'supabase'
-        }
+        },
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]'
       }
     },
   },
@@ -33,7 +34,7 @@ export default defineConfig({
       },
     }
   },
-  base: '/',
+  base: './',
   optimizeDeps: {
     include: ['@supabase/supabase-js']
   }
