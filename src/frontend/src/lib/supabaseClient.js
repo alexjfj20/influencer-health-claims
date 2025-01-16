@@ -10,4 +10,5 @@ if (!supabaseUrl || !supabaseAnonKey) {
     })
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Usando la versión global de Supabase cargada desde el CDN
+export const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey)
